@@ -1,10 +1,11 @@
 try:
-	while True:		
+	while True:
+		from pygame import *	
 		import time	
 		import os
 		import sys
 
-		os.system('tshark -a duration:30 -T psml > TEST123.txt')
+		os.system('tshark -a duration:30 -T psml -i 8 > TEST123.txt')
 		
 		from collections import Counter
 
@@ -75,11 +76,30 @@ try:
 		mostOccuring = Counter(destIp).most_common(1)[0][1]
 		print(counterList)
 		print(mostOccuring)
+		
+		msg = "Everything seems to be fine.\nMost Occuring IPs: %s"%(counterList[0:10])
+		
 		# print(destIp)
 		
-		print("If you wish to stop, press Ctrl+C. Otherwise, wait 5 seconds to continue")
-		time.sleep(5)
-		os.system('python test3.py')
+		#if mostOccuring > 100:			
+		#	mixer.init()
+		#	mixer.music.load('ALARM')
+		#	mixer.music.play()
+		
+		import smtplib
+
+		server = smtplib.SMTP('smtp.gmail.com',587)
+		server.starttls()
+		server.login("cyberdefense1a2b3c@gmail.com","cyberdefense")
+		
+		
+		
+		server.sendmail("cyberdefense1a2b3c@gmail.com","silvachristian98@gmail.com",msg)
+		#server.sendmail("cyberdefense1a2b3c@gmail.com","arturo.perez408@gmail.com",msg)
+		server.quit()
+		print("If you wish to stop, press Ctrl+C. Otherwise, wait 10 seconds to continue")
+		time.sleep(10)
+		#os.system('python test3.py')
 except KeyboardInterrupt:
 	pass
 
