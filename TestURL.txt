@@ -1,0 +1,143 @@
+
+No.35
+Time:		1.003437033
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		100
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.41
+Time:		1.019400170
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TCP
+Length:		54
+Info:		53502 \xe2\x86\x92 443 [ACK] Seq=47 Ack=47 Win=65535 Len=0
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f14.1e100.net
+
+No.65
+Time:		2.966013217
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		135
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f14.1e100.net
+
+No.66
+Time:		2.966094999
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		528
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.80
+Time:		3.047649786
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TCP
+Length:		54
+Info:		53500 \xe2\x86\x92 443 [ACK] Seq=556 Ack=768 Win=41958 Len=0
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.81
+Time:		3.048140787
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		100
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f14.1e100.net
+
+No.164
+Time:		3.952718279
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		362
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.168
+Time:		3.961084417
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TCP
+Length:		54
+Info:		53502 \xe2\x86\x92 443 [ACK] Seq=355 Ack=142 Win=65535 Len=0
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.169
+Time:		3.961390828
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		100
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.182
+Time:		4.054748377
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		165
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.183
+Time:		4.054868618
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		195
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.193
+Time:		4.190760470
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TCP
+Length:		54
+Info:		53502 \xe2\x86\x92 443 [ACK] Seq=653 Ack=1041 Win=65535 Len=0
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f206.1e100.net
+
+No.194
+Time:		4.190871815
+Source:		10.0.2.15
+Destination:	216.58.194.206
+Protocal:	TLSv1.2
+Length:		100
+Info:		Application Data
+
+Reverse DNS information(Source):		kali
+Reverse DNS information(Destination):		sfo03s01-in-f14.1e100.net
