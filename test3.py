@@ -13,8 +13,21 @@ server.starttls()
 server.login("cyberdefense1a2b3c@gmail.com","cyberdefense")
 
 
-URL = input("Would you like to look out for a certain URL: ")#Input command for Reverse DNS. it can be any url
-
+array_URL = list()
+URLs = list()
+URLinput = "0"
+while URLinput != "1":
+	URLinput = input("Please insert a URL: ")	
+	try: 
+		Inverse = socket.gethostbyname(URLinput)
+		Reverse = socket.gethostbyname(Inverse)
+		array_URL.append(Reverse)
+		URLs.append(URLinput)
+	except:
+		print("Incorrect URL")
+array_URL.remove('0.0.0.1')
+URLs.remove('1')
+print(array_URL)
 
 EMAIL = input("Please insert an email to begin: ")
 
@@ -26,19 +39,9 @@ if EMAIL:
 		msg = "\nEmail does not exist, please try again"
 		os.system('python3 test3.py')
 
-if URL:	
-	try: #if the URL string has something, it will be checked
-		Inverse = socket.gethostbyname(URL)
-		Reverse = socket.gethostbyaddr(Inverse)[2]#these 2 lines will convert the url into a list that has the url and the ip that we need.
-	except : #if the url doesn't work, the program will restart.
-		print("Incorrect URL, please try again")
-		os.system('python3 test3.py')
-if not URL: #if you choose not to have a url, it will be filled for you.
-		print("Incorrect URL, please try again")
-		os.system('python3 test3.py')
 
 
-if Reverse:
+if array_URL:
 	currenttime = datetime.datetime.now().time()
 	try: #this try statement will make the program run forever until you press Ctrl-C at the end
 		URLcounter = 0
@@ -57,8 +60,8 @@ if Reverse:
 	
 			from collections import Counter #will count the highest used packet
 
-			datain = open("TEST123.txt","r") 
-			dataout = open("Test2.txt", "w")#these 2 lines will import and export packet data into a more readable format
+			datain = open("TEST123.txt") 
+			dataout = open("Test2.txt", "w+")#these 2 lines will import and export packet data into a more readable format
 
 			delete_list = ['<packet>','<section>','</section>','<structure>','</packet>','</structure>']
 			for line in datain:
@@ -93,6 +96,7 @@ if Reverse:
 
 			data = []
 			destIp = []
+			sourceIp = []
 			count = []
 		
 
@@ -133,18 +137,20 @@ if Reverse:
 					
 					print("----------------------------------------------------")
 					
-					
-					if data[i][3] in Reverse:	
-						URLcounter += 1
-						datacount.writelines("\nNo."+data[i][0]+
-				"\nTime:\t\t"+data[i][1]+
-				"\nSource:\t\t"+data[i][2]+
-				"\nDestination:\t"+data[i][3]+
-				"\nProtocal:\t"+data[i][4]+
-				"\nLength:\t\t"+data[i][5]+
-				"\nInfo:\t\t"+data[i][6]+
-				"\n"+
-				"\r\n")
+					for f in range(len(array_URL)):
+						if array_URL[f] in  data[i][3]:	
+							URLcounter += 1
+							datacount.writelines("\nNo."+data[i][0]+
+					"\nTime:\t\t"+data[i][1]+
+					"\nSource:\t\t"+data[i][2]+
+					"\nDestination:\t"+data[i][3]+
+					"\nProtocal:\t"+data[i][4]+
+					"\nLength:\t\t"+data[i][5]+
+					"\nInfo:\t\t"+data[i][6]+
+					"\n"+
+					"\r\n")
+							sourceIp.append(data[i][2])
+							
 						
 						
 
@@ -158,18 +164,25 @@ if Reverse:
 					destIp.append("Broadcast")
 				else:
 					destIp.append(Destination)
+
+				
 				# creating a counter
 		
 		
 		
 		
 			counterList = Counter(destIp)
+			
 			mostOccuring = Counter(destIp).most_common(1)[0][1]
-			print("The most common IP",destIp[0])
+			sourceList = Counter(sourceIp)
+			
+			print("The most common IPs",counterList)
 			print("How many packets:",mostOccuring)
 			print("The URL counter is: ", URLcounter)
 	
-				
+			
+			
+
 			if mostOccuring > 10:
 				for i in range (3):
 					mixer.init()
@@ -199,12 +212,12 @@ if Reverse:
 					msg['To'] = toaddr
 					msg['Subject'] = "Packet Information: %s "%time.asctime( time.localtime(time.time()))
 					 
-					body = "\nThe website(%s) has been entered %d times out of %s other packets.\nThe capture was done from %s to %s"%(URL,URLcounter,int(lines[-10]),currenttime,datetime.datetime.now().time())
+					body = "\nThe following websites (%s) has been entered %d times out of %s other packets.\nThe capture was done from %s to %s.The following Ip's have accessed these websites: %s"%(URLs,URLcounter,int(lines[-10]),currenttime,datetime.datetime.now().time(),sourceList)
 					 
 					msg.attach(MIMEText(body, 'plain'))
 					 
 					filename = "TestURL.txt"
-					attachment = open("/root/Desktop/TestURL.txt", "rb")
+					attachment = open("/root/Desktop/TestURL.txt", "rb")#please change this if on raspberry pi
 					 
 					part = MIMEBase('application', 'octet-stream')
 					part.set_payload((attachment).read())
@@ -223,7 +236,9 @@ if Reverse:
 				except:
 					pass
 			print("If you wish to stop, press Ctrl+C.")
-			time.sleep(10)
+			time.sleep(3)
+			os.remove("TestURL.txt")
+			datacount = open("TestURL.txt", "w+")
 	except KeyboardInterrupt:
 		pass
 
