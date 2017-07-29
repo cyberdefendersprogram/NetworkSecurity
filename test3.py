@@ -45,7 +45,7 @@ if array_URL:
 	currenttime = datetime.datetime.now().time()
 	try: #this try statement will make the program run forever until you press Ctrl-C at the end
 		URLcounter = 0
-		datacount = open("TestURL.txt", "w")
+		datacount = open("URL.txt", "w")
 		while True:
 			from pygame import *	
 			import time	
@@ -61,7 +61,7 @@ if array_URL:
 			from collections import Counter #will count the highest used packet
 
 			datain = open("TEST123.txt") 
-			dataout = open("Test2.txt", "w+")#these 2 lines will import and export packet data into a more readable format
+			dataout = open("Main.txt", "w+")#these 2 lines will import and export packet data into a more readable format
 
 			delete_list = ['<packet>','<section>','</section>','<structure>','</packet>','</structure>']
 			for line in datain:
@@ -71,26 +71,9 @@ if array_URL:
 			datain.close()
 			dataout.close()
 
-			f = open("Test2.txt","r")
+			f = open("Main.txt","r")
 
-			"""class Packet(object):
-				def __init__(name, number, time, source, destination, protocal, length, info): #Constructor for all of the information
-					name.number = number
-					name.time = time
-					name.source = source
-					name.destination = destination
-					name.protocal = protocal
-					name.length = length
-					name.info = info
-
-				def displayInfo(self): #Method for displaying the data
-					print("Number : ", self.number,
-				      "Time : ", self.time,
-				      "Source : ", self.source,
-				      "Destination : ", self.destination,
-				      "Protocal : ", self.protocal ,
-				      "Length : " , self.length,
-				      "Info : ", self.info)"""
+			
 
 			lines = f.readlines() #Variable set to read a certain line. ex: lines[1] will read the first line of the text file
 
@@ -212,19 +195,24 @@ if array_URL:
 					msg['To'] = toaddr
 					msg['Subject'] = "Packet Information: %s "%time.asctime( time.localtime(time.time()))
 					 
-					body = "\nThe following websites (%s) has been entered %d times out of %s other packets.\nThe capture was done from %s to %s.The following Ip's have accessed these websites: %s"%(URLs,URLcounter,int(lines[-10]),currenttime,datetime.datetime.now().time(),sourceList)
-					 
+					body = "To Whome it may convern,\n\t\t The current server you are connected to may be compromised.\nThe following websites you have specified have been accessed %d time(s):\n%s\n\nThe following IP addresses have accessed these URLs: \n%s\n\nIf you wish to know more about the IP addresses, have a look at the URL.txt attachemnt.\nIf you wish to know about everything that happened in the server, look at the Main.txt file instead.\n----------------------------------------------------\n Scan has been done from %s to %s"%(URLcounter,URLs,sourceList,currenttime,datetime.datetime.now().time())		 
 					msg.attach(MIMEText(body, 'plain'))
 					 
-					filename = "TestURL.txt"
-					attachment = open("/root/Desktop/TestURL.txt", "rb")#please change this if on raspberry pi
+					filename = "URL.txt"
+					attachment = open("/root/Desktop/URL.txt", "rb")#please change this if on raspberry pi
+					filename = "Main.txt"					
+					attachment2 = open("/root/Desktop/Main.txt", "rb")
 					 
 					part = MIMEBase('application', 'octet-stream')
 					part.set_payload((attachment).read())
 					encoders.encode_base64(part)
-					part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-					 
+					part.add_header('Content-Disposition', "attachment; filename= URL")
+					part2 = MIMEBase('application', 'octet-stream')
+					part2.set_payload((attachment2).read())
+					encoders.encode_base64(part2)
+					part2.add_header('Content-Disposition', "attachment; filename= Main")
 					msg.attach(part)
+					msg.attach(part2)
 					 
 					server = smtplib.SMTP('smtp.gmail.com', 587)
 					server.starttls()
@@ -236,9 +224,9 @@ if array_URL:
 				except:
 					pass
 			print("If you wish to stop, press Ctrl+C.")
-			time.sleep(3)
-			os.remove("TestURL.txt")
-			datacount = open("TestURL.txt", "w+")
+			time.sleep(10)
+			os.remove("URL.txt")
+			datacount = open("URL.txt", "w+")
 	except KeyboardInterrupt:
 		pass
 
